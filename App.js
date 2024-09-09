@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, Image, TextInput, StyleSheet, Dimensions, KeyboardAvoidingView, Platform, Keyboard, StatusBar } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet, Dimensions, KeyboardAvoidingView, Platform, StatusBar, Keyboard } from 'react-native';
 
 const App = () => {
   const [isPortrait, setIsPortrait] = useState(true); // Trạng thái hướng màn hình
@@ -46,7 +46,7 @@ const App = () => {
   // Màu nền và kiểu chữ của thanh trạng thái
   const statusBarStyle = Platform.select({
     ios: {
-      backgroundColor: isPortrait ? 'white' : 'black',
+      backgroundColor: isPortrait ? 'lightgray' : 'darkgray',
       barStyle: isPortrait ? 'dark-content' : 'light-content',
     },
     android: {
@@ -84,12 +84,12 @@ const App = () => {
           onChangeText={setInputText}
         />
         <View style={[styles.buttonGroup, isPortrait ? styles.portraitButtonGroup : styles.landscapeButtonGroup]}>
-          <View style={[styles.buttonContainer, { width: buttonWidth, height: buttonHeight }]}>
-            <Button title="Button 1" onPress={() => {}} />
-          </View>
-          <View style={[styles.buttonContainer, { width: buttonWidth, height: buttonHeight }]}>
-            <Button title="Button 2" onPress={() => {}} />
-          </View>
+          <TouchableOpacity style={[styles.button, { width: buttonWidth, height: buttonHeight }]} onPress={() => {}}>
+            <Text style={styles.buttonText}>Button 1</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, { width: buttonWidth, height: buttonHeight }]} onPress={() => {}}>
+            <Text style={styles.buttonText}>Button 2</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -135,9 +135,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',     // Căn giữa nhóm nút theo chiều dọc
     marginTop: 20,            // Đẩy nút lên trên một chút để tránh bị chèn
   },
-  buttonContainer: {
+  button: {
+    backgroundColor: '#2196F3', // Nền xanh dương cho nút
+    justifyContent: 'center',
+    alignItems: 'center',
     marginHorizontal: 10,     // Khoảng cách giữa các nút
     marginVertical: 5,        // Khoảng cách dọc cho nút
+    borderRadius: 5,          // Bo góc cho nút
+  },
+  buttonText: {
+    color: 'white',           // Màu chữ trắng
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
